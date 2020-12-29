@@ -17,11 +17,11 @@
 */
 
 function pausedDraw() {
-  displayMessage("The game is paused. Press escape to continue.\n" +
-                 "You are playing beta version 1.0.0\n\n" +
+	displayMessage("The game is paused. Press escape to continue.\n" +
+	               "You are playing beta version 1.0.0\n\n" +
 
-                 "Nate's accuracy trainer  Copyright (C) 2020  Nathaniel Choe.\n" +
-                 "This program comes with ABSOLUTELY NO WARRANTY.\n" +
-                 "This is free softwarem and you are welcome to to redistribute it\n"+
-                 "under certain conditions; see license.txt for details.");
+	               "Nate's accuracy trainer  Copyright (C) 2020  Nathaniel Choe.\n" +
+	               "This program comes with ABSOLUTELY NO WARRANTY.\n" +
+	               "This is free softwarem and you are welcome to to redistribute it\n"+
+	               "under certain conditions; see license.txt for details.");
 }//For consistency and also to standardize.
