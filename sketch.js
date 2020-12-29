@@ -16,9 +16,9 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-let resetFunctions = [pausedReset, regularReset];
-let clickFunctions = [pausedClick, regularClick];
-let drawFunctions = [pausedDraw, regularDraw];
+let resetFunctions = [pausedReset, regularReset, speedReset];
+let clickFunctions = [pausedClick, regularClick, speedClick];
+let drawFunctions = [pausedDraw, regularDraw, speedDraw];
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
@@ -55,7 +55,9 @@ function keyPressed() {
 	if (48 < keyCode && keyCode < 58) {
 		newMode = min(keyCode - 48, totalModes);
 		if (mode != newMode) {
+			playedFrames = 0
 			resetFunctions[mode]();
+			resetFunctions[newMode]();
 			mode = newMode;
 		}
 	}

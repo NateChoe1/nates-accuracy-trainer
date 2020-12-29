@@ -16,20 +16,18 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-//Thanks dad for telling me about IIFEs, I never would've found out about them otherwise.
-
 (function() {
 	let defaultGrowthSpeed = 0.5;
 	let defaultEndSize = 50;
 	let duration = 1800;
-	let frequency = 60;
-	let targets = new Set();
+	let target;
 	let targetsHit = 0;
-	let targetsShown = 0;
+	let clicks = 0;
+	let targetsMissed = 0;
 
 	class Target {
 		constructor () {
-			this.x = random(width);
+			this.x = random(width)
 			this.y = random(height);
 			this.size = 0;
 			this.growthSpeed = defaultGrowthSpeed;
@@ -47,36 +45,32 @@
 			this.size += this.growthSpeed;
 		}
 	}
+
 	
-	regularDraw = function() {
+	speedDraw = function() {
 		if (playedFrames >= duration) {
-			displayMessage("The game has ended. You got " + targetsHit + "/" + targetsShown + " (" + (targetsHit / targetsShown * 100) + "%) targets.\nPress r to play again.")
+			displayMessage("The game has ended. You hit " + targetsHit + " targets/" + clicks + " clicks (" + (targetsHit / clicks * 100) + "% accuracy).\nYou also spent too long on " + targetsMissed + " targets.\nPress r to play again.")
 			return;
 		}
-
-		if (playedFrames % frequency == 0) {
-			targets.add(new Target());
-			targetsShown++;
-		}
-
-		for (let t of targets) {
-			t.draw();
-			if (t.size >= t.endSize) targets.delete(t);
+		
+		target.draw();
+		if (target.size >= target.endSize) {
+			targetsMissed++;
+			target = new Target();
 		}
 	};
 	
-	regularReset = function() {
-		targets = new Set();
+	speedReset = function() {
+		target = new Target();
 		targetsHit = 0;
-		targetsShown = 0;
+		clicks = 0;
 	};
 	
-	regularClick = function(mouseX, mouseY) {
-		for (let target of targets) {
-			if (sqrt(pow(mouseX - target.x, 2) + pow(mouseY - target.y, 2)) <= target.endSize / 2) {
-				targets.delete(target);
-				targetsHit++;
-			}
+	speedClick = function(mouseX, mouseY) {
+		if (sqrt(pow(mouseX - target.x, 2) + pow(mouseY - target.y, 2)) <= target.endSize / 2) {
+			target = new Target();
+			targetsHit++;
 		}
+		clicks++;
 	}
 })()
