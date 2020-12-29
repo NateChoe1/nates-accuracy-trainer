@@ -16,6 +16,10 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+let resetFunctions = [pausedReset, regularReset];
+let clickFunctions = [pausedClick, regularClick];
+let drawFunctions = [pausedDraw, regularDraw];
+
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 }
@@ -25,15 +29,8 @@ function draw() {
 		createCanvas(windowWidth, windowHeight);
 	}
 	background(0);
-	
-	switch (mode) {
-		case 0:
-			pausedDraw();
-			break;
-		case 1:
-			vanillaDraw();
-			break;
-	}
+
+	drawFunctions[mode]();
 	if (mode != 0) {
 		playedFrames++;
 	}
@@ -42,28 +39,28 @@ function draw() {
 function keyPressed() {
 	if (keyCode == ESCAPE) {
 		if (mode != 0) {
-			selectedMode = mode;
+			previousMode = mode;
 			mode = 0;
 		}
 		else {
-			mode = selectedMode;
+			mode = previousMode;
 		}
 	}
-	
+
 	if (keyCode == 82) {
 		playedFrames = 0;
-		switch (mode) {
-			case 1:
-				vanillaReset();
-				break;
+		resetFunctions[mode]();
+	}
+
+	if (48 < keyCode && keyCode < 58) {
+		newMode = min(keyCode - 48, totalModes);
+		if (mode != newMode) {
+			resetFunctions[mode]();
+			mode = newMode;
 		}
 	}
 }
 
 function mousePressed() {
-	switch(mode) {
-		case 1:
-			vanillaClick(mouseX, mouseY);
-			break;
-	}
+	clickFunctions[mode](mouseX, mouseY);
 }

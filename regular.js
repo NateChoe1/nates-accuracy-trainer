@@ -46,7 +46,7 @@
 		}
 	}
 	
-	vanillaDraw = function() {
+	regularDraw = function() {
 		if (playedFrames >= duration) {
 			displayMessage("The game has ended. You got " + targetsHit + "/" + targetsShown + " (" + (targetsHit / targetsShown * 100) + "%) targets.\nPress r to play again.")
 			return;
@@ -63,13 +63,13 @@
 		}
 	};
 	
-	vanillaReset = function() {
+	regularReset = function() {
 		targets = new Set();
 		targetsHit = 0;
 		targetsShown = 0;
 	};
 	
-	vanillaClick = function(mouseX, mouseY) {
+	regularClick = function(mouseX, mouseY) {
 		for (let target of targets) {
 			if (sqrt(pow(mouseX - target.x, 2) + pow(mouseY - target.y, 2)) <= target.endSize / 2) {
 				targets.delete(target);

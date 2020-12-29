@@ -17,8 +17,9 @@
 */
 
 let mode = 1;
-let selectedMode = 1;
+let previousMode = 1;
 let playedFrames = 0;//This is constantly increasing and will only be reset on new games. There will be no other instances in which this value changes. Do not create any, do not delete any. These are constant. I repeat, do not change playedFrames, only read from it.
+let totalModes = 1;//Paused doesn't count.
 
 function displayMessage(message) {
 	fill(255);
