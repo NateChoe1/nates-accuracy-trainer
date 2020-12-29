@@ -26,7 +26,7 @@ function pausedClick(mouseX, mouseY) {
 
 function pausedDraw() {
 	displayMessage("The game is paused. Press escape to continue.\n" +
-	               "You are playing beta version 1.0.1\n\n" +
+	               "You are playing beta version 1.1.0\n\n" +
 
 	               "Nate's accuracy trainer  Copyright (C) 2020  Nathaniel Choe.\n" +
 	               "This program comes with ABSOLUTELY NO WARRANTY.\n" +
