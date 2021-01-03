@@ -17,10 +17,11 @@
 */
 
 (function() {
-	let target;
+	let targets = new Set();
 	let targetsHit = 0;
 	let clicks = 0;
 	let gameDuration = defaultGameDuration;
+	let concurrentTargets = 5;
 
 	class Target {
 		constructor () {
@@ -43,19 +44,27 @@
 			return;
 		}
 		
-		target.draw();
+		for (let target of targets) {
+			target.draw();
+		}
 	};
 	
 	speedReset = function() {
-		target = new Target();
+		targets = new Set();
+		for (let i = 0; i < concurrentTargets; i++) {
+			targets.add(new Target());
+		}
 		targetsHit = 0;
 		clicks = 0;
 	};
 	
 	speedClick = function(mouseX, mouseY) {
-		if (sqrt(pow(mouseX - target.x, 2) + pow(mouseY - target.y, 2)) <= target.size / 2) {
-			target = new Target();
-			targetsHit++;
+		for (let target of targets) {
+			if (sqrt(pow(mouseX - target.x, 2) + pow(mouseY - target.y, 2)) <= target.size / 2) {
+				targets.delete(target);
+				targets.add(new Target());
+				targetsHit++;
+			}
 		}
 		clicks++;
 	}
