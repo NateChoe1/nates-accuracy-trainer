@@ -19,21 +19,19 @@
 //Thanks dad for telling me about IIFEs, I never would've found out about them otherwise.
 
 (function() {
-	let defaultGrowthSpeed = 0.5;
-	let defaultEndSize = 50;
-	let duration = 1800;
 	let frequency = 60;
 	let targets = new Set();
 	let targetsHit = 0;
 	let targetsShown = 0;
+	let gameDuration = defaultGameDuration;
 
 	class Target {
 		constructor () {
 			this.x = random(width);
 			this.y = random(height);
 			this.size = 0;
-			this.growthSpeed = defaultGrowthSpeed;
-			this.endSize = defaultEndSize;
+			this.growthSpeed = defaultTargetSize / defaultTargetDuration / 60;
+			this.endSize = defaultTargetSize;
 		}
 
 		draw() {
@@ -49,7 +47,7 @@
 	}
 	
 	regularDraw = function() {
-		if (playedFrames >= duration) {
+		if (playedFrames >= gameDuration) {
 			displayMessage("The game has ended. You got " + targetsHit + "/" + targetsShown + " (" + (targetsHit / targetsShown * 100) + "%) targets.\nPress r to play again.")
 			return;
 		}

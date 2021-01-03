@@ -17,47 +17,33 @@
 */
 
 (function() {
-	let defaultGrowthSpeed = 0.5;
-	let defaultEndSize = 50;
-	let duration = 1800;
 	let target;
 	let targetsHit = 0;
 	let clicks = 0;
-	let targetsMissed = 0;
+	let gameDuration = defaultGameDuration;
 
 	class Target {
 		constructor () {
 			this.x = random(width)
 			this.y = random(height);
-			this.size = 0;
-			this.growthSpeed = defaultGrowthSpeed;
-			this.endSize = defaultEndSize;
+			this.size = defaultTargetSize;
 		}
 
 		draw() {
-			fill('rgba(0,0,0,0)');
-			stroke(255, 0, 0);
-			strokeWeight(3);
-			ellipse(this.x, this.y, this.endSize, this.endSize);
 			fill(255, 0, 0);
 			noStroke();
 			ellipse(this.x, this.y, this.size, this.size);
-			this.size += this.growthSpeed;
 		}
 	}
 
 	
 	speedDraw = function() {
-		if (playedFrames >= duration) {
-			displayMessage("The game has ended. You hit " + targetsHit + " targets/" + clicks + " clicks (" + (targetsHit / clicks * 100) + "% accuracy).\nYou also spent too long on " + targetsMissed + " targets.\nPress r to play again.")
+		if (playedFrames >= gameDuration) {
+			displayMessage("The game has ended. You hit " + targetsHit + " targets/" + clicks + " clicks (" + (targetsHit / clicks * 100) + "% accuracy).\nPress r to play again.")
 			return;
 		}
 		
 		target.draw();
-		if (target.size >= target.endSize) {
-			targetsMissed++;
-			target = new Target();
-		}
 	};
 	
 	speedReset = function() {
@@ -67,7 +53,7 @@
 	};
 	
 	speedClick = function(mouseX, mouseY) {
-		if (sqrt(pow(mouseX - target.x, 2) + pow(mouseY - target.y, 2)) <= target.endSize / 2) {
+		if (sqrt(pow(mouseX - target.x, 2) + pow(mouseY - target.y, 2)) <= target.size / 2) {
 			target = new Target();
 			targetsHit++;
 		}
