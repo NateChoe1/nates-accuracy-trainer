@@ -64,6 +64,7 @@
 				targets.delete(target);
 				targets.add(new Target());
 				targetsHit++;
+				break;
 			}
 		}
 		clicks++;
