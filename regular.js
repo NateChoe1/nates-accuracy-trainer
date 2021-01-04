@@ -30,7 +30,8 @@
 			this.x = random(width);
 			this.y = random(height);
 			this.size = 0;
-			this.growthSpeed = defaultTargetSize / defaultTargetDuration / 60;
+			this.targetDuration = 1;
+			this.growthSpeed = defaultTargetSize / this.targetDuration / 60;
 			this.endSize = defaultTargetSize;
 		}
 

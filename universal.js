@@ -17,7 +17,6 @@
 */
 
 let defaultTargetSize = 50;
-let defaultTargetDuration = 1;
 let defaultGameDuration = 1800;
 let mode = 1;
 let previousMode = 1;

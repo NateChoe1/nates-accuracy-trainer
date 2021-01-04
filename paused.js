@@ -25,11 +25,18 @@ function pausedClick(mouseX, mouseY) {
 }
 
 function pausedDraw() {
-	displayMessage("The game is paused. Press escape to continue.\n" +
-	               "You are playing beta version 1.1.0\n\n" +
+	displayMessage(
+		"The game is paused. Press escape to continue.\n" +
+		"You are playing beta version 1.1.0\n\n" +
+		
+		"Scroll the mouse to change the size of the circle.\n\n" +
 
-	               "Nate's accuracy trainer  Copyright (C) 2020  Nathaniel Choe.\n" +
-	               "This program comes with ABSOLUTELY NO WARRANTY.\n" +
-	               "This is free softwarem and you are welcome to to redistribute it\n"+
-	               "under certain conditions; see license.txt for details.");
+		"Nate's accuracy trainer  Copyright (C) 2020  Nathaniel Choe.\n" +
+		"This program comes with ABSOLUTELY NO WARRANTY.\n" +
+		"This is free softwarem and you are welcome to to redistribute it\n"+
+		"under certain conditions; see license.txt for details.");
+
+	fill(255, 0, 0);
+	noStroke();
+	ellipse(width * 3 / 4, height / 2, defaultTargetSize, defaultTargetSize);
 }

@@ -66,3 +66,7 @@ function keyPressed() {
 function mousePressed() {
 	clickFunctions[mode](mouseX, mouseY);
 }
+
+function mouseWheel(event) {
+	defaultTargetSize -= event.delta;
+}
